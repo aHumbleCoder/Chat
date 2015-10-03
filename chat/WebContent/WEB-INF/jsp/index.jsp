@@ -24,12 +24,14 @@
 	function sendMsg() {
 		var message = document.getElementById("msg-input").value;
 		stompClient.send("/app/sendMessage", {}, JSON.stringify({
-			'message' : message
+			"userName" : "",
+			"channelId" : "public",
+			"message" : message
 		}));
 
 		document.getElementById("msg-input").value = "";
 	}
-	
+
 	function onKeyup(event) {
 		if (13 === event.keyCode) {
 			sendMsg();

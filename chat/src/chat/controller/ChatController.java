@@ -28,7 +28,8 @@ public class ChatController {
 		ZonedDateTime dateTime = ZonedDateTime.now();
 		String time = dateTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
 		msg.setMessage("(" + time + ") " + msg.getMessage());
-		
-		template.convertAndSend("/channel/public", msg);
+
+		final String channelId = "/channel/" + msg.getChannelId();
+		template.convertAndSend(channelId, msg);
 	}
 }
