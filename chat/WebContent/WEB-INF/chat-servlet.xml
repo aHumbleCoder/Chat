@@ -11,7 +11,7 @@
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-	<context:component-scan base-package="chat.controller" />
+	<context:component-scan base-package="chat" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import chat.kafka.MessageProducer;
 import chat.model.Message;
 
 @Controller
 public class ChatController {
 	@Autowired
 	private SimpMessagingTemplate template;
+
+	@Autowired
+	private MessageProducer msgProducer;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -31,5 +35,8 @@ public class ChatController {
 
 		final String channelId = "/channel/" + msg.getChannelId();
 		template.convertAndSend(channelId, msg);
+
+		msgProducer.send(msg.getChannelId(), msg.getUserName(),
+				msg.getMessage());
 	}
 }
