@@ -1,4 +1,4 @@
-package chat.kafka;
+package chat.dto;
 
 import java.io.Serializable;
 

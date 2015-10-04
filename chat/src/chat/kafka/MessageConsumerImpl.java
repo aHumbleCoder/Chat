@@ -1,7 +1,5 @@
 package chat.kafka;
 
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -13,8 +11,10 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
+
+import chat.dto.RawMessage;
+import chat.service.MessageDispatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,7 +24,7 @@ public class MessageConsumerImpl implements MessageConsumer {
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Autowired
-	private SimpMessagingTemplate template;
+	private MessageDispatcher messageDispatcher;
 
 	private ExecutorService executor;
 
@@ -55,14 +55,7 @@ public class MessageConsumerImpl implements MessageConsumer {
 						RawMessage msg = objectMapper.readValue(record.value(),
 								RawMessage.class);
 
-						ZonedDateTime dateTime = ZonedDateTime.now();
-						String time = dateTime.format(DateTimeFormatter
-								.ofPattern("hh:mm a"));
-						msg.setContent("(" + time + ") " + msg.getContent());
-
-						final String channelId = "/channel/"
-								+ msg.getChannelId();
-						template.convertAndSend(channelId, msg);
+						messageDispatcher.process(msg);
 					} catch (Exception e) {
 
 					}

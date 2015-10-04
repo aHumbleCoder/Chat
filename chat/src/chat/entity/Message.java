@@ -17,4 +17,6 @@ public class Message implements Serializable {
 	private String userName;
 
 	private String content;
+	
+	private String time;
 }
