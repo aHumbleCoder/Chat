@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 public class RawMessage implements Serializable  {
 	private static final long serialVersionUID = 8116004791227598002L;
 
+	private String channelId;
+	
 	private String userName;
+	
 	private String content;
 }

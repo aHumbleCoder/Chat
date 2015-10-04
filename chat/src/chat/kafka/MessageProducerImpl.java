@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class MessageProducerImpl implements MessageProducer {
-	private static final String TOPIC = "raw-chat-messages";
+	private static final String TOPIC = KafkaConfig.RAW_MSG_TOPIC;
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -25,9 +25,8 @@ public class MessageProducerImpl implements MessageProducer {
 
 		try {
 			byte[] data = objectMapper.writeValueAsBytes(new RawMessage(
-					userName, message));
-			producer.send(new ProducerRecord<String, byte[]>(TOPIC, channelId,
-					data));
+					channelId, userName, message));
+			producer.send(new ProducerRecord<String, byte[]>(TOPIC, data));
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
@@ -36,9 +35,8 @@ public class MessageProducerImpl implements MessageProducer {
 	private void configure() {
 		if (Objects.isNull(producer)) {
 			Properties props = new Properties();
-			props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-			props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-					"org.apache.kafka.common.serialization.StringSerializer");
+			props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
+					KafkaConfig.BROKER_SERVERS);
 			props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
 					"org.apache.kafka.common.serialization.ByteArraySerializer");
 			producer = new KafkaProducer<String, byte[]>(props);
