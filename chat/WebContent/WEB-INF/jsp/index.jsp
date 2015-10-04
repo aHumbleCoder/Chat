@@ -13,7 +13,7 @@
 	};
 
 	function onMessage(frame) {
-		var msg = JSON.parse(frame.body).message;
+		var msg = JSON.parse(frame.body).content;
 		var $msgDiv = document.createElement("div");
 		$msgDiv.appendChild(document.createTextNode(msg));
 		document.getElementById("msg-history").appendChild($msgDiv);

@@ -37,6 +37,8 @@ public class MessageProducerImpl implements MessageProducer {
 			Properties props = new Properties();
 			props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
 					KafkaConfig.BROKER_SERVERS);
+			props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+					"org.apache.kafka.common.serializers.StringSerializer");
 			props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
 					"org.apache.kafka.common.serialization.ByteArraySerializer");
 			producer = new KafkaProducer<String, byte[]>(props);

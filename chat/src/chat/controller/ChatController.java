@@ -25,7 +25,7 @@ public class ChatController {
 
 	@Autowired
 	private MessageProducer msgProducer;
-	
+
 	@Autowired
 	private MessageConsumer msgConsumer;
 
@@ -36,22 +36,15 @@ public class ChatController {
 
 	@MessageMapping("/sendMessage")
 	public void sendMessage(Message msg) throws Exception {
-		ZonedDateTime dateTime = ZonedDateTime.now();
-		String time = dateTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-		msg.setMessage("(" + time + ") " + msg.getMessage());
-
-		final String channelId = "/channel/" + msg.getChannelId();
-		template.convertAndSend(channelId, msg);
-
 		msgProducer.send(msg.getChannelId(), msg.getUserName(),
 				msg.getMessage());
 	}
-	
+
 	@PostConstruct
 	private void startMsgConsumer() {
 		msgConsumer.run();
 	}
-	
+
 	@PreDestroy
 	private void cleanUp() {
 		msgConsumer.shutdown();
