@@ -81,7 +81,7 @@ public class MessageConsumerImpl implements MessageConsumer {
 
   @Override
   public void shutdown() {
+    consumer.close();
     executor.shutdown();
   }
-
 }
