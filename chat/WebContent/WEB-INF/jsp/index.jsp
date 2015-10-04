@@ -24,9 +24,9 @@
 	function sendMsg() {
 		var message = document.getElementById("msg-input").value;
 		stompClient.send("/app/sendMessage", {}, JSON.stringify({
-			"userName" : "",
 			"channelId" : "public",
-			"message" : message
+			"userName" : "",
+			"content" : message
 		}));
 
 		document.getElementById("msg-input").value = "";

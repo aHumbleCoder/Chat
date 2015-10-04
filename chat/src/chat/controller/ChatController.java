@@ -1,8 +1,5 @@
 package chat.controller;
 
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -14,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import chat.entity.Message;
 import chat.kafka.MessageConsumer;
 import chat.kafka.MessageProducer;
-import chat.model.Message;
 
 @Controller
 public class ChatController {
@@ -37,7 +34,7 @@ public class ChatController {
 	@MessageMapping("/sendMessage")
 	public void sendMessage(Message msg) throws Exception {
 		msgProducer.send(msg.getChannelId(), msg.getUserName(),
-				msg.getMessage());
+				msg.getContent());
 	}
 
 	@PostConstruct
