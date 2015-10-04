@@ -12,22 +12,22 @@ import chat.dto.RawMessage;
 
 @Component
 public class MessageDispatcherImpl implements MessageDispatcher {
-	@Autowired
-	private SimpMessagingTemplate template;
+  @Autowired
+  private SimpMessagingTemplate template;
 
-	@Override
-	public void process(RawMessage msg) {
-		ZonedDateTime dateTime = ZonedDateTime.now();
-		String time = dateTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-		msg.setContent("(" + time + ") " + msg.getContent());
+  @Override
+  public void process(RawMessage msg) {
+    ZonedDateTime dateTime = ZonedDateTime.now();
+    String time = dateTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+    msg.setContent("(" + time + ") " + msg.getContent());
 
-		final String channelId = "/channel/" + msg.getChannelId();
-		template.convertAndSend(channelId, msg);
-	}
+    final String channelId = "/channel/" + msg.getChannelId();
+    template.convertAndSend(channelId, msg);
+  }
 
-	@Override
-	public void process(List<RawMessage> msgs) {
+  @Override
+  public void process(List<RawMessage> msgs) {
 
-	}
+  }
 
 }

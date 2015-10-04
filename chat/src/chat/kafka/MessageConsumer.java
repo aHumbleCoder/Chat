@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface MessageConsumer {
-	void run();
-	
-	void shutdown();
+  void run();
+
+  void shutdown();
 }

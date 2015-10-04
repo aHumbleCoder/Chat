@@ -15,35 +15,33 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class MessageProducerImpl implements MessageProducer {
-	private static final String TOPIC = KafkaConfig.RAW_MSG_TOPIC;
+  private static final String TOPIC = KafkaConfig.RAW_MSG_TOPIC;
 
-	private static final ObjectMapper objectMapper = new ObjectMapper();
+  private static final ObjectMapper objectMapper = new ObjectMapper();
 
-	private KafkaProducer<String, byte[]> producer = null;
+  private KafkaProducer<String, byte[]> producer = null;
 
-	@Override
-	public void send(String channelId, String userName, String message) {
-		configure();
+  @Override
+  public void send(String channelId, String userName, String message) {
+    configure();
 
-		try {
-			byte[] data = objectMapper.writeValueAsBytes(new RawMessage(
-					channelId, userName, message));
-			producer.send(new ProducerRecord<String, byte[]>(TOPIC, data));
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    try {
+      byte[] data = objectMapper.writeValueAsBytes(new RawMessage(channelId, userName, message));
+      producer.send(new ProducerRecord<String, byte[]>(TOPIC, data));
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
-	private void configure() {
-		if (Objects.isNull(producer)) {
-			Properties props = new Properties();
-			props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-					KafkaConfig.BROKER_SERVERS);
-			props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-					"org.apache.kafka.common.serializers.StringSerializer");
-			props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-					"org.apache.kafka.common.serialization.ByteArraySerializer");
-			producer = new KafkaProducer<String, byte[]>(props);
-		}
-	}
+  private void configure() {
+    if (Objects.isNull(producer)) {
+      Properties props = new Properties();
+      props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConfig.BROKER_SERVERS);
+      props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+          "org.apache.kafka.common.serializers.StringSerializer");
+      props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+          "org.apache.kafka.common.serialization.ByteArraySerializer");
+      producer = new KafkaProducer<String, byte[]>(props);
+    }
+  }
 }

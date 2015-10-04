@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message implements Serializable {
-	private static final long serialVersionUID = 5432096974864448846L;
+  private static final long serialVersionUID = 5432096974864448846L;
 
-	private String channelId;
-	
-	private String userName;
+  private String channelId;
 
-	private String content;
-	
-	private String time;
+  private String userName;
+
+  private String content;
+
+  private String time;
 }

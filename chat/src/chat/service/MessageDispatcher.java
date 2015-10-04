@@ -8,7 +8,7 @@ import chat.dto.RawMessage;
 
 @Component
 public interface MessageDispatcher {
-	void process(RawMessage msg);
-	
-	void process(List<RawMessage> msgs);
+  void process(RawMessage msg);
+
+  void process(List<RawMessage> msgs);
 }
