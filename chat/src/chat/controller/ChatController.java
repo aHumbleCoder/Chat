@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class ChatController {
   private MessageProducer msgProducer;
 
   @Autowired
+  @Qualifier("msgConsumer")
   private MessageConsumer msgConsumer;
 
   @RequestMapping(value = "/", method = RequestMethod.GET)

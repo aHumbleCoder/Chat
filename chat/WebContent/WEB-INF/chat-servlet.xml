@@ -19,6 +19,8 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<bean id="msgConsumer" class="chat.kafka.MessageSimpleConsumerImpl"></bean>
 
 	<websocket:message-broker
 		application-destination-prefix="/app">
