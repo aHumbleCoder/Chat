@@ -1,24 +1,35 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>chat</groupId>
-    <artifactId>chat</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <groupId>chat-data-access</groupId>
-  <artifactId>chat-data-access</artifactId>
-  <name>chat-data-access</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-  <dependency>
-  	<groupId>chat</groupId>
-  	<artifactId>chat-data-model</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
-  </dependency>
-  </dependencies>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>chat</groupId>
+		<artifactId>chat</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>chat</groupId>
+	<artifactId>chat-data-access</artifactId>
+	<name>chat-data-access</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>chat</groupId>
+			<artifactId>chat-data-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>0.8.2.2</version>
+		</dependency>
+	</dependencies>
 </project>
