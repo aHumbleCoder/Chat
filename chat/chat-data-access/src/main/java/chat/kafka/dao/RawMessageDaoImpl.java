@@ -6,6 +6,7 @@ import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import chat.kafka.config.KafkaConfig;
 import chat.kafka.dto.RawMessageDto;
 
+@Component
 public class RawMessageDaoImpl implements RawMessageDao {
 
   private static final String TOPIC = KafkaConfig.RAW_MSG_TOPIC;

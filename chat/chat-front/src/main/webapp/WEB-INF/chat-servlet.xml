@@ -20,8 +20,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<bean id="msgConsumer" class="chat.kafka.MessageSimpleConsumerImpl"></bean>
-
 	<websocket:message-broker
 		application-destination-prefix="/app">
 		<websocket:stomp-endpoint path="/ws">

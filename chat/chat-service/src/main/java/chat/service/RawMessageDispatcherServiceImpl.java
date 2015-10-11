@@ -3,12 +3,16 @@ package chat.service;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Component;
 
 import chat.kafka.dto.RawMessageDto;
 
+@Component
 public class RawMessageDispatcherServiceImpl implements RawMessageDispatcherService {
 
+  @Autowired
   private SimpMessagingTemplate template;
 
   @Override

@@ -8,6 +8,9 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
@@ -19,6 +22,7 @@ import chat.service.RawMessageDispatcherService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Component
 public class RawMessageConsumerServiceImpl implements RawMessageConsumerService {
 
   private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -27,6 +31,7 @@ public class RawMessageConsumerServiceImpl implements RawMessageConsumerService 
 
   private ExecutorService executor;
 
+  @Autowired
   private RawMessageDispatcherService messageDispatcher;
 
   @Override
