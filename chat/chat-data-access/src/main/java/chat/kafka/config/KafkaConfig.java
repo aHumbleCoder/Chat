@@ -2,6 +2,8 @@ package chat.kafka.config;
 
 public final class KafkaConfig {
   static public final String RAW_MSG_TOPIC = "raw-chat-messages";
+  
+  static public final String MSG_TOPIC = "chat-messages";
 
   static public final String BROKER_SERVERS = "localhost:9092";
 
