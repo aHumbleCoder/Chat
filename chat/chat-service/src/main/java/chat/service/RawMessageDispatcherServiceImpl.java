@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
+import chat.entity.MessageEntity;
 import chat.kafka.dto.RawMessageDto;
 
 @Component
@@ -19,10 +20,16 @@ public class RawMessageDispatcherServiceImpl implements RawMessageDispatcherServ
   public void process(RawMessageDto rawMessage) {
     ZonedDateTime dateTime = ZonedDateTime.now();
     String time = dateTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-    rawMessage.setContent("(" + time + ") " + rawMessage.getContent());
+    
+    MessageEntity msgEntity = MessageEntity.builder()
+        .channelId(rawMessage.getChannelId())
+        .userName(rawMessage.getUserName())
+        .time(time)
+        .content(rawMessage.getContent())
+        .build();
 
     final String channelId = "/channel/" + rawMessage.getChannelId();
-    template.convertAndSend(channelId, rawMessage);
+    template.convertAndSend(channelId, msgEntity);
   }
 
 }

@@ -9,13 +9,15 @@
 	var stompClient = Stomp.over(socket);
 
 	function onConnect() {
-		stompClient.subscribe('/channel/public', onMessage);
+		stompClient.subscribe("/channel/public", onMessage);
 	};
 
 	function onMessage(frame) {
-		var msg = JSON.parse(frame.body).content;
+		var messageBody = JSON.parse(frame.body);
+		var time = messageBody.time;
+		var msg = messageBody.content;
 		var $msgDiv = document.createElement("div");
-		$msgDiv.appendChild(document.createTextNode(msg));
+		$msgDiv.appendChild(document.createTextNode("(" + time + ")  " + msg));
 		document.getElementById("msg-history").appendChild($msgDiv);
 	}
 
