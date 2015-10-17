@@ -1,5 +1,8 @@
 package chat.controller;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -26,6 +29,8 @@ public class ChatController {
 
   @Autowired
   private RawMessageProducerSerivce rawMessageProducer;
+  
+  private ExecutorService executor;
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public ModelAndView index() {
@@ -39,11 +44,13 @@ public class ChatController {
 
   @PostConstruct
   private void startMsgConsumer() {
-    msgConsumer.run();
+    executor = Executors.newCachedThreadPool();
+    executor.submit(msgConsumer);
   }
 
   @PreDestroy
   private void cleanUp() {
     msgConsumer.shutdown();
+    executor.shutdownNow();
   }
 }

@@ -10,4 +10,6 @@ public final class KafkaConfig {
   static public final String ZOOKEEPER_SERVERS = "localhost:2181";
 
   static public final String GROUP_ID_FOR_RAW_MSG = "raw-msg-group-id";
+  
+  static public final String GROUP_ID_FOR_MSG_CASSANDRA = "cassandra-msg-group-id";
 }
