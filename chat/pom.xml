@@ -52,5 +52,6 @@
     <module>chat-service</module>
     <module>chat-front</module>
     <module>chat-entity</module>
+    <module>cassandra-access</module>
   </modules>
 </project>
