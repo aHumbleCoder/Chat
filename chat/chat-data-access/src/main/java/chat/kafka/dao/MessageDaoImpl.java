@@ -2,14 +2,14 @@ package chat.kafka.dao;
 
 import org.springframework.stereotype.Component;
 
-import chat.dto.MessageDto;
+import chat.dto.ChatMessageDto;
 import chat.kafka.config.KafkaConfig;
 
 @Component
 public class MessageDaoImpl extends KafkaGeneralDao implements MessageDao {
 
   @Override
-  public void save(MessageDto message) {
+  public void save(ChatMessageDto message) {
     super.savePayload(message);
   }
 
