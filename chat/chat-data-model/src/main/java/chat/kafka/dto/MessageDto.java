@@ -1,4 +1,4 @@
-package chat.dto;
+package chat.kafka.dto;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;

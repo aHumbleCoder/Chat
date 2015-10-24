@@ -2,8 +2,8 @@ package chat.kafka.dao;
 
 import org.springframework.stereotype.Component;
 
-import chat.dto.MessageDto;
 import chat.kafka.config.KafkaConfig;
+import chat.kafka.dto.MessageDto;
 
 @Component
 public class MessageDaoImpl extends KafkaGeneralDao implements MessageDao {

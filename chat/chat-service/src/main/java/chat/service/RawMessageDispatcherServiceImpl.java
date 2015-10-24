@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
-import chat.dto.MessageDto;
 import chat.entity.MessageEntity;
 import chat.kafka.dao.MessageDao;
+import chat.kafka.dto.MessageDto;
 import chat.kafka.dto.RawMessageDto;
 
 @Component
