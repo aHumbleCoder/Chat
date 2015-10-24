@@ -2,9 +2,9 @@ package chat.kafka.dao;
 
 import org.springframework.stereotype.Component;
 
-import chat.dto.ChatMessageDto;
+import chat.dto.MessageDto;
 
 @Component
 public interface MessageDao {
-  void save(ChatMessageDto message);
+  void save(MessageDto message);
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
-import chat.dto.ChatMessageDto;
+import chat.dto.MessageDto;
 import chat.entity.MessageEntity;
 import chat.kafka.dao.MessageDao;
 import chat.kafka.dto.RawMessageDto;
@@ -36,7 +36,7 @@ public class RawMessageDispatcherServiceImpl implements RawMessageDispatcherServ
     final String channelId = "/channel/" + rawMessage.getChannelId();
     template.convertAndSend(channelId, msgEntity);
     
-    ChatMessageDto message = ChatMessageDto.builder()
+    MessageDto message = MessageDto.builder()
         .channelId(rawMessage.getChannelId())
         .userName(rawMessage.getUserName())
         .content(rawMessage.getContent())
