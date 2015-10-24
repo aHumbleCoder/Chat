@@ -2,6 +2,7 @@ package chat.service;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -40,7 +41,7 @@ public class RawMessageDispatcherServiceImpl implements RawMessageDispatcherServ
         .channelId(rawMessage.getChannelId())
         .userName(rawMessage.getUserName())
         .content(rawMessage.getContent())
-        .dateTime(dateTime)
+        .dateTime(Date.from(dateTime.toInstant()))
         .build();
     messageDao.save(message);
   }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import chat.consumer.service.CassandraConsumerService;
 import chat.consumer.service.RawMessageConsumerService;
 import chat.entity.MessageEntity;
 import chat.service.RawMessageProducerSerivce;
@@ -26,6 +27,9 @@ public class ChatController {
 
   @Autowired
   private RawMessageConsumerService msgConsumer;
+  
+  @Autowired
+  private CassandraConsumerService cassandraConsumer;
 
   @Autowired
   private RawMessageProducerSerivce rawMessageProducer;
@@ -45,12 +49,16 @@ public class ChatController {
   @PostConstruct
   private void startMsgConsumer() {
     executor = Executors.newCachedThreadPool();
+    
     executor.submit(msgConsumer);
+    executor.submit(cassandraConsumer);
   }
 
   @PreDestroy
   private void cleanUp() {
     msgConsumer.shutdown();
+    cassandraConsumer.shutdown();
+    
     executor.shutdownNow();
   }
 }

@@ -1,7 +1,7 @@
 package chat.kafka.dto;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +21,6 @@ public class MessageDto implements Serializable {
 
   private String content;
   
-  private ZonedDateTime dateTime;
+  private Date dateTime;
 
 }
