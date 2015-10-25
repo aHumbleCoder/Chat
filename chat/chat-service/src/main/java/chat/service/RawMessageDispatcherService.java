@@ -2,9 +2,9 @@ package chat.service;
 
 import org.springframework.stereotype.Component;
 
-import chat.kafka.dto.RawMessageDto;
+import chat.kafka.dto.KafkaRawMessage;
 
 @Component
 public interface RawMessageDispatcherService {
-  void process(RawMessageDto rawMessage);
+  void process(KafkaRawMessage rawMessage);
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import chat.entity.MessageEntity;
 import chat.kafka.dao.RawMessageDao;
-import chat.kafka.dto.RawMessageDto;
+import chat.kafka.dto.KafkaRawMessage;
 
 @Component
 public class RawMessageProducerSerivceImpl implements RawMessageProducerSerivce {
@@ -14,8 +14,8 @@ public class RawMessageProducerSerivceImpl implements RawMessageProducerSerivce 
 
   @Override
   public void send(MessageEntity messageEntity) {
-    RawMessageDto rawMessage =
-        RawMessageDto.builder().channelId(messageEntity.getChannelId())
+    KafkaRawMessage rawMessage =
+        KafkaRawMessage.builder().channelId(messageEntity.getChannelId())
             .userName(messageEntity.getUserName()).content(messageEntity.getContent()).build();
 
     rawMessageDao.save(rawMessage);

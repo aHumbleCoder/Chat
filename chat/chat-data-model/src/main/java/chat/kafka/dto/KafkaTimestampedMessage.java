@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MessageDto implements Serializable {
+public class KafkaTimestampedMessage implements Serializable {
   private static final long serialVersionUID = 2475291145434027636L;
 
   private String channelId;

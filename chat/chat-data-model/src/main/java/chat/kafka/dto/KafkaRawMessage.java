@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RawMessageDto implements Serializable {
+public class KafkaRawMessage implements Serializable {
   private static final long serialVersionUID = 8116004791227598002L;
 
   private String channelId;

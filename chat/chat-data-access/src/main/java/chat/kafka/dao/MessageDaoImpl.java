@@ -3,13 +3,13 @@ package chat.kafka.dao;
 import org.springframework.stereotype.Component;
 
 import chat.kafka.config.KafkaConfig;
-import chat.kafka.dto.MessageDto;
+import chat.kafka.dto.KafkaTimestampedMessage;
 
 @Component
 public class MessageDaoImpl extends KafkaGeneralDao implements MessageDao {
 
   @Override
-  public void save(MessageDto message) {
+  public void save(KafkaTimestampedMessage message) {
     super.savePayload(message);
   }
 

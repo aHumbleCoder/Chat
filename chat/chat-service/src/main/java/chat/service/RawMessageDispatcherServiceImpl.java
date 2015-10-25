@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 import chat.entity.MessageEntity;
 import chat.kafka.dao.MessageDao;
-import chat.kafka.dto.MessageDto;
-import chat.kafka.dto.RawMessageDto;
+import chat.kafka.dto.KafkaTimestampedMessage;
+import chat.kafka.dto.KafkaRawMessage;
 
 @Component
 public class RawMessageDispatcherServiceImpl implements RawMessageDispatcherService {
@@ -23,7 +23,7 @@ public class RawMessageDispatcherServiceImpl implements RawMessageDispatcherServ
   private MessageDao messageDao;
 
   @Override
-  public void process(RawMessageDto rawMessage) {
+  public void process(KafkaRawMessage rawMessage) {
     ZonedDateTime dateTime = ZonedDateTime.now();
     String time = dateTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
     
@@ -37,7 +37,7 @@ public class RawMessageDispatcherServiceImpl implements RawMessageDispatcherServ
     final String channelId = "/channel/" + rawMessage.getChannelId();
     template.convertAndSend(channelId, msgEntity);
     
-    MessageDto message = MessageDto.builder()
+    KafkaTimestampedMessage message = KafkaTimestampedMessage.builder()
         .channelId(rawMessage.getChannelId())
         .userName(rawMessage.getUserName())
         .content(rawMessage.getContent())

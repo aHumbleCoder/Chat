@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import chat.kafka.config.KafkaConfig;
-import chat.kafka.dto.RawMessageDto;
+import chat.kafka.dto.KafkaRawMessage;
 import chat.service.RawMessageDispatcherService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +28,7 @@ public class RawMessageConsumerServiceImpl extends GeneralConsumerService implem
       byte[] data = it.next().message();
 
       try {
-        RawMessageDto msg = objectMapper.readValue(data, RawMessageDto.class);
+        KafkaRawMessage msg = objectMapper.readValue(data, KafkaRawMessage.class);
         messageDispatcher.process(msg);
       } catch (IOException e) {
         throw new RuntimeException(e);
